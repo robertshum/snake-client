@@ -27,4 +27,4 @@ setupData = function(conn) {
   conn.write("Name: ROB");
 };
 
-module.exports = connect;
+module.exports = { connect };
