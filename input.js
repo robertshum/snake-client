@@ -1,3 +1,5 @@
+const { banter, ENCODING, MOVEMENT_KEYS } = require("./constants");
+
 // Stores the active TCP connection object.
 let connection;
 
@@ -10,34 +12,26 @@ const handleUserInput = function(key) {
     process.exit();
   }
 
-  if (key.toLowerCase() === "w") {
+  if (key.toLowerCase() === MOVEMENT_KEYS.MOVE_UP) {
     connection.write("Move: up");
     return;
   }
 
-  if (key.toLowerCase() === "a") {
+  if (key.toLowerCase() === MOVEMENT_KEYS.MOVE_LEFT) {
     connection.write("Move: left");
     return;
   }
 
-  if (key.toLowerCase() === "s") {
+  if (key.toLowerCase() === MOVEMENT_KEYS.MOVE_DOWN) {
     connection.write("Move: down");
     return;
   }
 
-  if (key.toLowerCase() === "d") {
+  if (key.toLowerCase() === MOVEMENT_KEYS.MOVE_RIGHT) {
     connection.write("Move: right");
     return;
   }
 };
-
-const banter = ["I'm a sneaky snake",
-  "Hello snake world",
-  "You look fang-cy",
-  "It's a hit or hiss",
-  "Lighthouse Labs rocks!",
-  "~>°)~~~~~~~~~~",
-  "=)"];
 
 //25 character limit for msgs
 const startBanter = () => {
@@ -52,7 +46,7 @@ const startBanter = () => {
 const setupInput = function(conn) {
   const stdin = process.stdin;
   stdin.setRawMode(true);
-  stdin.setEncoding("utf8");
+  stdin.setEncoding(ENCODING);
   stdin.resume();
   stdin.on("data", (data) => handleUserInput(data)); //handles input
   connection = conn;
